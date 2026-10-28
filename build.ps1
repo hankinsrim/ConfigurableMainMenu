@@ -75,6 +75,26 @@ if ($Zip) {
     New-Item -ItemType Directory -Force "$stage\fomod" | Out-Null
     Copy-Item "$PSScriptRoot\dist\*" $stage -Recurse
     Copy-Item "$PSScriptRoot\fomod\ModuleConfig.xml" "$stage\fomod"
+    # GPL-3.0 requires the license text and a copyright notice in the download.
+    Copy-Item "$PSScriptRoot\LICENSE" "$stage\LICENSE.txt"
+    @"
+Configurable Main Menu $version
+Copyright (C) 2026 hankinsrim
+
+This program is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+the GNU General Public License for more details (LICENSE.txt, or
+https://www.gnu.org/licenses/gpl-3.0.html).
+
+Source code: https://github.com/hankinsrim/ConfigurableMainMenu
+
+Uses CommonLibSSE-NG (https://github.com/alandtse/CommonLibVR/tree/ng), GPL-3.0-or-later
+with exceptions.
+"@ | Out-File "$stage\README.txt" -Encoding utf8
     @"
 <?xml version="1.0" encoding="UTF-8"?>
 <fomod>
